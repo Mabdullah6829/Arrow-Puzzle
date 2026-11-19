@@ -1,0 +1,27 @@
+package com.google.android.gms.internal.measurement;
+
+/* JADX INFO: loaded from: classes2.dex */
+final class zzfp implements zzadz {
+
+    /* JADX INFO: renamed from: a */
+    public static final zzadz f22490a = new zzfp();
+
+    private zzfp() {
+    }
+
+    @Override // com.google.android.gms.internal.measurement.zzadz
+    public final boolean zza(int i2) {
+        switch (i2) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+                return true;
+            default:
+                return false;
+        }
+    }
+}

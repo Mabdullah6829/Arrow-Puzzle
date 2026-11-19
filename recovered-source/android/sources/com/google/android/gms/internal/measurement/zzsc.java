@@ -1,0 +1,22 @@
+package com.google.android.gms.internal.measurement;
+
+import android.net.Uri;
+import android.text.TextUtils;
+import java.io.File;
+
+/* JADX INFO: loaded from: classes2.dex */
+public final class zzsc {
+    /* JADX INFO: renamed from: a */
+    public static final File m10641a(Uri uri) throws zzsi {
+        if (!uri.getScheme().equals("file")) {
+            throw new zzsi("Scheme must be 'file'");
+        }
+        if (!TextUtils.isEmpty(uri.getQuery())) {
+            throw new zzsi("Did not expect uri to have query");
+        }
+        if (TextUtils.isEmpty(uri.getAuthority())) {
+            return new File(uri.getPath());
+        }
+        throw new zzsi("Did not expect uri to have authority");
+    }
+}

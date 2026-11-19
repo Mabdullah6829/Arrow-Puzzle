@@ -1,0 +1,42 @@
+package com.google.android.play.core.review;
+
+import android.app.Activity;
+import android.content.Intent;
+import android.os.Handler;
+import android.os.Looper;
+import androidx.annotation.NonNull;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskCompletionSource;
+import com.google.android.gms.tasks.Tasks;
+import com.google.android.play.core.common.PlayCoreDialogWrapperActivity;
+
+/* JADX INFO: loaded from: classes2.dex */
+public final class zzd implements ReviewManager {
+    private final zzi zza;
+    private final Handler zzb = new Handler(Looper.getMainLooper());
+
+    public zzd(zzi zziVar) {
+        this.zza = zziVar;
+    }
+
+    @Override // com.google.android.play.core.review.ReviewManager
+    @NonNull
+    public final Task<Void> launchReviewFlow(@NonNull Activity activity, @NonNull ReviewInfo reviewInfo) {
+        if (reviewInfo.zzb()) {
+            return Tasks.m10776f(null);
+        }
+        Intent intent = new Intent(activity, (Class<?>) PlayCoreDialogWrapperActivity.class);
+        intent.putExtra("confirmation_intent", reviewInfo.zza());
+        intent.putExtra("window_flags", activity.getWindow().getDecorView().getWindowSystemUiVisibility());
+        TaskCompletionSource taskCompletionSource = new TaskCompletionSource();
+        intent.putExtra("result_receiver", new zzc(this, this.zzb, taskCompletionSource));
+        activity.startActivity(intent);
+        return taskCompletionSource.f23216a;
+    }
+
+    @Override // com.google.android.play.core.review.ReviewManager
+    @NonNull
+    public final Task<ReviewInfo> requestReviewFlow() {
+        return this.zza.zza();
+    }
+}

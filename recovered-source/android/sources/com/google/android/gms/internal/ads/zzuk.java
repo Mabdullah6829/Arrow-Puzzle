@@ -1,0 +1,12 @@
+package com.google.android.gms.internal.ads;
+
+/* JADX INFO: loaded from: classes2.dex */
+final class zzuk {
+
+    /* JADX INFO: renamed from: a */
+    public final Object f21005a;
+
+    public zzuk(zzum zzumVar) {
+        this.f21005a = zzumVar;
+    }
+}

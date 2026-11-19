@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Arrow Puzzle Super Admin</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%237c8cff'/%3E%3Cpath d='M8 16h14m-6-6 6 6-6 6' stroke='%230b1020' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<section id="login" class="login" hidden>
+  <form class="card login-card" id="login-form" autocomplete="off">
+    <div class="brand big"><span class="logo">&#10140;</span> Arrow Puzzle <b>Super Admin</b></div>
+    <p class="muted">Local admin for levels and game texts. The password is printed when the server starts and saved in <code>admin/.admin-password</code>.</p>
+    <label for="pw">Password</label>
+    <input id="pw" type="password" autofocus required>
+    <button class="btn primary" type="submit">Log in</button>
+    <p class="error" id="login-error" role="alert"></p>
+  </form>
+</section>
+
+<div id="app" hidden>
+  <header class="topbar">
+    <div class="brand"><span class="logo">&#10140;</span> Arrow Puzzle <b>Super Admin</b></div>
+    <nav id="tabs" role="tablist">
+      <button role="tab" data-tab="overview" class="active">Overview</button>
+      <button role="tab" data-tab="levels">Levels</button>
+      <button role="tab" data-tab="texts">Texts</button>
+      <button role="tab" data-tab="backups">Backups</button>
+    </nav>
+    <button class="btn ghost" id="logout">Log out</button>
+  </header>
+
+  <main>
+    <!-- Overview -->
+    <section id="tab-overview" class="tab">
+      <h1>Overview</h1>
+      <div id="stats" class="stats"></div>
+      <h2>Level files</h2>
+      <div id="file-cards" class="cards"></div>
+      <p class="muted small" id="roots"></p>
+    </section>
+
+    <!-- Levels -->
+    <section id="tab-levels" class="tab" hidden>
+      <div class="levels-layout">
+        <aside class="card list-pane">
+          <div class="row">
+            <select id="file-select" aria-label="Level file"></select>
+          </div>
+          <div class="row wrap">
+            <button class="btn small" id="btn-new">+ Blank</button>
+            <button class="btn small" id="btn-gen">&#10024; Generate</button>
+            <label class="check small"><input type="checkbox" id="only-problems"> problems only</label>
+          </div>
+          <div class="list-head"><span>#</span><span>Game lvl</span><span>Size</span><span>Arrows</span><span>Diff</span><span></span></div>
+          <div id="level-list" class="level-list" role="listbox" aria-label="Levels"></div>
+        </aside>
+
+        <div class="editor-pane">
+          <div id="editor-empty" class="card empty">Pick a level on the left, or create one.</div>
+          <div id="editor" class="card" hidden>
+            <div class="editor-title">
+              <h2 id="editor-title"></h2>
+              <span id="dirty" class="badge warn" hidden>unsaved changes</span>
+            </div>
+
+            <div class="toolbar" role="toolbar" aria-label="Tools">
+              <div class="seg" id="tools">
+                <button data-tool="select" class="active" title="Select an arrow (S)">Select</button>
+                <button data-tool="draw" title="Drag from the arrow tip along its body (D)">Draw arrow</button>
+                <button data-tool="paint" title="Paint grid cells (P)">Paint cells</button>
+                <button data-tool="play" title="Click arrows to test the level (T)">Play test</button>
+              </div>
+              <div class="seg" id="brushes" hidden>
+                <button data-brush="1" class="active" title="Playable dot">Dot</button>
+                <button data-brush="0" title="Empty cell">Empty</button>
+                <button data-brush="-1" title="Outside the board shape">Void</button>
+              </div>
+              <div class="seg" id="dirs" aria-label="Exit direction of selected arrow">
+                <button data-dir="-1,0" title="Exit left">&larr;</button>
+                <button data-dir="0,-1" title="Exit up">&uarr;</button>
+                <button data-dir="0,1" title="Exit down">&darr;</button>
+                <button data-dir="1,0" title="Exit right">&rarr;</button>
+              </div>
+              <button class="btn small" id="btn-flip" title="Swap head and tail of the selected arrow">Flip</button>
+              <button class="btn small danger" id="btn-del-arrow" title="Delete selected arrow (Del)">Delete arrow</button>
+              <span class="spacer"></span>
+              <button class="btn small" id="btn-undo" title="Ctrl+Z">Undo</button>
+              <button class="btn small" id="btn-redo" title="Ctrl+Y">Redo</button>
+            </div>
+
+            <div class="canvas-wrap" id="canvas-wrap">
+              <canvas id="board" aria-label="Level board"></canvas>
+            </div>
+            <div class="play-bar" id="play-bar" hidden>
+              <span id="play-status" class="muted"></span>
+              <button class="btn small" id="btn-play-reset">Reset</button>
+              <button class="btn small" id="btn-play-auto">Show solution</button>
+            </div>
+
+            <div id="messages" class="messages" aria-live="polite"></div>
+
+            <div class="props">
+              <label>Width <input type="number" id="in-w" min="1" max="60"></label>
+              <label>Height <input type="number" id="in-h" min="1" max="60"></label>
+              <button class="btn small" id="btn-resize">Resize</button>
+              <label>Difficulty
+                <select id="in-diff"><option>1</option><option>2</option><option>3</option></select>
+              </label>
+            </div>
+
+            <div class="actions">
+              <button class="btn primary" id="btn-save">Save level</button>
+              <button class="btn" id="btn-revert">Revert</button>
+              <span class="spacer"></span>
+              <button class="btn small" id="btn-dup">Duplicate</button>
+              <label class="inline small">Move to # <input type="number" id="in-move" min="1" class="narrow"></label>
+              <button class="btn small" id="btn-move">Move</button>
+              <button class="btn small danger" id="btn-del">Delete level</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Texts -->
+    <section id="tab-texts" class="tab" hidden>
+      <div class="row between">
+        <h1>Game texts <span class="muted small">(m.xml)</span></h1>
+        <div class="row">
+          <input type="search" id="text-search" placeholder="Search id or text" aria-label="Search texts">
+          <button class="btn" id="btn-text-add">+ Add text</button>
+          <button class="btn primary" id="btn-text-save">Save texts</button>
+        </div>
+      </div>
+      <p class="muted small">Use <code>\n</code> for a line break. Changing or removing an id the game code uses will show "NAN" in the game, so only rename ids you added.</p>
+      <div class="card"><table class="texts"><thead id="texts-head"></thead><tbody id="texts-body"></tbody></table></div>
+    </section>
+
+    <!-- Backups -->
+    <section id="tab-backups" class="tab" hidden>
+      <div class="row between">
+        <h1>Backups</h1>
+        <button class="btn" id="btn-snapshot">Snapshot everything now</button>
+      </div>
+      <p class="muted small">A file is copied here before its first change in each admin session. Restoring first backs up the current version.</p>
+      <div id="backup-list"></div>
+    </section>
+  </main>
+</div>
+
+<div id="toasts" class="toasts" aria-live="polite"></div>
+
+<dialog id="dlg" class="card">
+  <form method="dialog" id="dlg-form">
+    <h2 id="dlg-title"></h2>
+    <div id="dlg-body"></div>
+    <div class="row end">
+      <button class="btn" value="cancel" formnovalidate>Cancel</button>
+      <button class="btn primary" value="ok" id="dlg-ok">OK</button>
+    </div>
+  </form>
+</dialog>
+
+<script src="level-tools.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

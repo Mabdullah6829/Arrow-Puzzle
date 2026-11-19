@@ -1,0 +1,10 @@
+package com.google.android.gms.internal.ads;
+
+/* JADX INFO: loaded from: classes2.dex */
+@Deprecated
+public final class zzac extends zzab {
+    static {
+        new zzaa();
+        new zzac();
+    }
+}

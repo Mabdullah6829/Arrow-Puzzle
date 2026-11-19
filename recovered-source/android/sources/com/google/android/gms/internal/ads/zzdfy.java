@@ -1,0 +1,24 @@
+package com.google.android.gms.internal.ads;
+
+import java.lang.ref.WeakReference;
+
+/* JADX INFO: loaded from: classes2.dex */
+final class zzdfy implements Runnable {
+
+    /* JADX INFO: renamed from: s */
+    public final WeakReference f12139s;
+
+    @Override // java.lang.Runnable
+    public final void run() {
+        zzdga zzdgaVar = (zzdga) this.f12139s.get();
+        if (zzdgaVar != null) {
+            zzdgaVar.m5923J0(new zzdiw() { // from class: com.google.android.gms.internal.ads.zzdfx
+                @Override // com.google.android.gms.internal.ads.zzdiw
+                /* JADX INFO: renamed from: b */
+                public final /* synthetic */ void mo5900b(Object obj) {
+                    ((zzdfv) obj).mo5915u();
+                }
+            });
+        }
+    }
+}

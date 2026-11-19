@@ -1,0 +1,54 @@
+package com.google.android.gms.internal.ads;
+
+import android.os.ParcelFileDescriptor;
+import com.google.android.gms.common.util.IOUtils;
+import com.google.common.util.concurrent.ListenableFuture;
+import java.io.IOException;
+import java.io.InputStream;
+
+/* JADX INFO: loaded from: classes2.dex */
+final /* synthetic */ class zzeii implements zzhbn {
+    @Override // com.google.android.gms.internal.ads.zzhbn
+    /* JADX INFO: renamed from: b */
+    public final ListenableFuture mo3248b(Object obj) throws IOException {
+        final InputStream inputStream = (InputStream) obj;
+        ParcelFileDescriptor[] parcelFileDescriptorArrCreatePipe = ParcelFileDescriptor.createPipe();
+        ParcelFileDescriptor parcelFileDescriptor = parcelFileDescriptorArrCreatePipe[0];
+        final ParcelFileDescriptor parcelFileDescriptor2 = parcelFileDescriptorArrCreatePipe[1];
+        ((zzcfx) zzcfy.f9946a).execute(new Runnable() { // from class: com.google.android.gms.internal.ads.zzfmg
+            @Override // java.lang.Runnable
+            public final void run() {
+                ParcelFileDescriptor parcelFileDescriptor3 = parcelFileDescriptor2;
+                InputStream inputStream2 = inputStream;
+                try {
+                    try {
+                        ParcelFileDescriptor.AutoCloseOutputStream autoCloseOutputStream = new ParcelFileDescriptor.AutoCloseOutputStream(parcelFileDescriptor3);
+                        try {
+                            IOUtils.m3650b(inputStream2, autoCloseOutputStream, false);
+                            autoCloseOutputStream.close();
+                            inputStream2.close();
+                        } catch (Throwable th) {
+                            try {
+                                autoCloseOutputStream.close();
+                            } catch (Throwable th2) {
+                                th.addSuppressed(th2);
+                            }
+                            throw th;
+                        }
+                    } catch (Throwable th3) {
+                        if (inputStream2 != null) {
+                            try {
+                                inputStream2.close();
+                            } catch (Throwable th4) {
+                                th3.addSuppressed(th4);
+                            }
+                        }
+                        throw th3;
+                    }
+                } catch (IOException unused) {
+                }
+            }
+        });
+        return zzhcf.m7367a(parcelFileDescriptor);
+    }
+}

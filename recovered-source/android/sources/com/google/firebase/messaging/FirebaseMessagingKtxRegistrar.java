@@ -1,0 +1,14 @@
+package com.google.firebase.messaging;
+
+import com.google.firebase.components.Component;
+import com.google.firebase.components.ComponentRegistrar;
+import java.util.List;
+import p058e0.C6313u;
+
+/* JADX INFO: loaded from: classes2.dex */
+public final class FirebaseMessagingKtxRegistrar implements ComponentRegistrar {
+    @Override // com.google.firebase.components.ComponentRegistrar
+    public List<Component<?>> getComponents() {
+        return C6313u.f24338s;
+    }
+}

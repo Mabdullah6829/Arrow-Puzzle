@@ -1,0 +1,32 @@
+# secrets and local state
+admin/.admin-password
+admin/backups/
+.env
+*.keystore
+*.jks
+local.properties
+
+# generated / downloaded
+node_modules/
+**/build/
+.gradle/
+.expo/
+expo-app/expo-go-qr.png
+
+# original package (large, not ours to redistribute)
+*.xapk
+*.apk
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# deployment target (host/user) and staging
+deploy/deploy.conf
+deploy/.stage/
+
+# third-party credentials recovered from the original app (Google/Firebase API key, AdMob IDs): not ours to publish
+recovered-source/android/resources/res/values/strings.xml
+recovered-source/android/resources/res/layout/activity_main.xml

@@ -1,0 +1,12 @@
+# Arrow Puzzle Super Admin - managed by deploy/deploy.sh
+Options -Indexes
+DirectoryIndex index.html
+
+RewriteEngine On
+RewriteRule ^api/(.*)$ api.php?r=$1 [L,QSA]
+
+<IfModule mod_headers.c>
+  Header always set X-Frame-Options "DENY"
+  Header always set Content-Security-Policy "default-src 'self'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'self'"
+  Header always set Cache-Control "no-store"
+</IfModule>

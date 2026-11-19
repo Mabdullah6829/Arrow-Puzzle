@@ -1,0 +1,9 @@
+package com.google.android.gms.internal.ads;
+
+import android.app.Application;
+
+/* JADX INFO: loaded from: classes2.dex */
+public interface zzbfk {
+    /* JADX INFO: renamed from: a */
+    void mo4842a(Application.ActivityLifecycleCallbacks activityLifecycleCallbacks);
+}

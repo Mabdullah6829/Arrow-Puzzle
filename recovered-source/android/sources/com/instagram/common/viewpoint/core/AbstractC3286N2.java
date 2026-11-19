@@ -1,0 +1,49 @@
+package com.instagram.common.viewpoint.core;
+
+import android.view.View;
+
+/* JADX INFO: renamed from: com.facebook.ads.redexgen.X.N2 */
+/* JADX INFO: loaded from: assets/audience_network/classes2.dex */
+public abstract class AbstractC3286N2 {
+    public void A02() {
+    }
+
+    public void A04() {
+    }
+
+    public void A05() {
+    }
+
+    public void A06() {
+    }
+
+    public void A07() {
+    }
+
+    public void A08() {
+    }
+
+    public void A09() {
+    }
+
+    public void A0A() {
+    }
+
+    public void A0B(C4686ju c4686ju) {
+    }
+
+    public void A0C() {
+    }
+
+    public void A0D() {
+    }
+
+    public void A0E(View view) {
+    }
+
+    public void A0F(InterfaceC3285N1 interfaceC3285N1) {
+    }
+
+    public void A0G(C3821Vm c3821Vm) {
+    }
+}

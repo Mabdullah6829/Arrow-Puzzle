@@ -1,0 +1,10 @@
+package p011H;
+
+/* JADX INFO: renamed from: H.L */
+/* JADX INFO: loaded from: classes2.dex */
+public abstract class AbstractC0248L extends AbstractC0249M implements InterfaceC0282k {
+    @Override // p011H.AbstractC0290s, java.util.concurrent.Future
+    public final boolean isCancelled() {
+        return this.f567s instanceof C0268d;
+    }
+}

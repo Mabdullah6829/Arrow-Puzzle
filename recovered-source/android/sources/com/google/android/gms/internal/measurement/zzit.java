@@ -1,0 +1,8 @@
+package com.google.android.gms.internal.measurement;
+
+/* JADX INFO: loaded from: classes2.dex */
+public final class zzit extends zzadp implements zzafd {
+    private zzit() {
+        throw null;
+    }
+}

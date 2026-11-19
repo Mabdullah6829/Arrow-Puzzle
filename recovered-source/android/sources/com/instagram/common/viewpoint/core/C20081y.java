@@ -1,0 +1,11 @@
+package com.instagram.common.viewpoint.core;
+
+import android.media.AudioAttributes;
+
+/* JADX INFO: renamed from: com.facebook.ads.redexgen.X.1y */
+/* JADX INFO: loaded from: assets/audience_network/classes2.dex */
+public final class C20081y {
+    public static void A00(AudioAttributes.Builder builder, int i2) {
+        builder.setSpatializationBehavior(i2);
+    }
+}

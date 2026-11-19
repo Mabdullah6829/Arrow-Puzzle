@@ -1,0 +1,33 @@
+package com.google.firebase.firestore;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import java.util.Arrays;
+
+/* JADX INFO: loaded from: classes2.dex */
+public class VectorValue {
+    private final double[] values;
+
+    public VectorValue(@Nullable double[] dArr) {
+        this.values = dArr == null ? new double[0] : (double[]) dArr.clone();
+    }
+
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        return Arrays.equals(this.values, ((VectorValue) obj).values);
+    }
+
+    public int hashCode() {
+        return Arrays.hashCode(this.values);
+    }
+
+    @NonNull
+    public double[] toArray() {
+        return (double[]) this.values.clone();
+    }
+}

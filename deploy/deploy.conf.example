@@ -1,0 +1,9 @@
+# Copy to deploy/deploy.conf (git-ignored) and fill in. Never put the SSH password here.
+DEPLOY_HOST=your.server.ip
+DEPLOY_PORT=22
+DEPLOY_USER=your_ssh_user
+DEPLOY_DOMAIN=arrow.example.com
+# Must end in /arrow: the folder that serves DEPLOY_DOMAIN
+DEPLOY_PATH=/home/your_ssh_user/domains/example.com/public_html/arrow
+# Optional: path to an SSH private key. Without it, export ARROW_SSH_PW for the session.
+#DEPLOY_KEY=~/.ssh/arrow_deploy

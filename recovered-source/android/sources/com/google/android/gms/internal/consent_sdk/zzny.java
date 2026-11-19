@@ -1,0 +1,8 @@
+package com.google.android.gms.internal.consent_sdk;
+
+/* JADX INFO: loaded from: classes2.dex */
+public final class zzny extends zzqj implements zzrr {
+    private zzny() {
+        throw null;
+    }
+}

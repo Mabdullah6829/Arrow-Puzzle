@@ -1,0 +1,35 @@
+package com.instagram.common.viewpoint.core;
+
+import com.facebook.ads.NativeAd;
+import com.facebook.ads.internal.api.MediaViewVideoRendererApi;
+
+/* JADX INFO: renamed from: com.facebook.ads.redexgen.X.W4 */
+/* JADX INFO: loaded from: assets/audience_network/classes2.dex */
+public class C3838W4 implements InterfaceC3807VX {
+    public final /* synthetic */ MediaViewVideoRendererApi A00;
+    public final /* synthetic */ C3833Vz A01;
+
+    public C3838W4(C3833Vz c3833Vz, MediaViewVideoRendererApi mediaViewVideoRendererApi) {
+        this.A01 = c3833Vz;
+        this.A00 = mediaViewVideoRendererApi;
+    }
+
+    @Override // com.instagram.common.viewpoint.core.InterfaceC3807VX
+    public final void AJU() {
+        this.A01.A00 = 1.0f;
+        this.A00.setVolume(1.0f);
+    }
+
+    @Override // com.instagram.common.viewpoint.core.InterfaceC3807VX
+    public final void AJZ(NativeAd nativeAd) {
+        this.A01.A02 = nativeAd.getNativeOptions();
+        this.A01.A0G();
+        this.A01.A0H();
+        this.A01.A0Q(C3732UK.A0L(nativeAd.getInternalNativeAd()), new C3834W0(C3732UK.A0L(nativeAd.getInternalNativeAd())));
+    }
+
+    @Override // com.instagram.common.viewpoint.core.InterfaceC3807VX
+    public final void AKY() {
+        this.A01.A0J();
+    }
+}

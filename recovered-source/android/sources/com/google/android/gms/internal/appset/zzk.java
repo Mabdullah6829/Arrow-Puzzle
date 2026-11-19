@@ -1,0 +1,8 @@
+package com.google.android.gms.internal.appset;
+
+import androidx.annotation.VisibleForTesting;
+
+/* JADX INFO: loaded from: classes2.dex */
+@VisibleForTesting
+final class zzk extends Exception {
+}

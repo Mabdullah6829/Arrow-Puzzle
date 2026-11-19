@@ -1,0 +1,7 @@
+{
+  "name": "arrow-puzzle-super-admin",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Local admin dashboard for Arrow Puzzle levels and texts. No dependencies.",
+  "scripts": { "start": "node server.js", "test": "node test.js" }
+}

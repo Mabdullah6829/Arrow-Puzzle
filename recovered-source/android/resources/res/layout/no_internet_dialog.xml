@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:aapt="http://schemas.android.com/aapt"
+    android:layout_gravity="center"
+    android:background="@drawable/a1_grad"
+    android:padding="8dp"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="32dp"
+    android:layout_marginRight="32dp"
+    android:backgroundTint="@color/white">
+    <RelativeLayout
+        android:id="@+id/rell"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+        <ImageView
+            android:layout_gravity="center"
+            android:background="@mipmap/no_internet"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_centerHorizontal="true"/>
+    </RelativeLayout>
+    <TextView
+        android:textStyle="bold"
+        android:textColor="@color/red"
+        android:gravity="center"
+        android:id="@+id/no_connection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="NO INTERNET"
+        android:layout_below="@+id/rell"
+        android:layout_centerInParent="true"
+        android:textAlignment="center"/>
+    <TextView
+        android:textColor="@color/black"
+        android:id="@+id/noconnection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="No internet Connection!\10 Please Connect to internet and try again.."
+        android:layout_below="@+id/no_connection"
+        android:layout_centerInParent="true"
+        android:textAlignment="center"/>
+    <RelativeLayout
+        android:id="@+id/ree"
+        android:background="@color/grey"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="15dp"
+        android:layout_below="@+id/noconnection"/>
+    <TextView
+        android:textColor="@color/white"
+        android:gravity="center"
+        android:id="@+id/ok_rettry"
+        android:background="@drawable/a1_grad"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="10dp"
+        android:text="Try Again"
+        android:layout_below="@+id/ree"
+        android:layout_centerHorizontal="true"
+        android:paddingStart="35dp"
+        android:paddingEnd="35dp"
+        android:backgroundTint="@color/black"/>
+</RelativeLayout>
