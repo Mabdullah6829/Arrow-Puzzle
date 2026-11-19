@@ -6,7 +6,7 @@ The game is a **Phaser (HTML5/JavaScript)** game running inside a native Android
 
 - GitHub (HTTPS): https://github.com/Mabdullah6829/Arrow-Puzzle.git
 - GitHub (SSH): `git@github.com:Mabdullah6829/Arrow-Puzzle.git`
-- This folder is **not yet a git repository** and nothing has been pushed.
+- The repository is **public**. Pushing from this folder works through the GitHub CLI login (`gh auth login`, HTTPS). Files that must never be committed are listed in `.gitignore`: the admin password file, backups, deploy settings, keystores, the original XAPK/APKs, and the original publisher's API keys and ad IDs.
 
 ## Layout
 
@@ -114,6 +114,7 @@ It only works while both servers run on your laptop, and the link changes if you
 Newest first. Every task adds an entry here.
 
 ### 2026-11-19
+- **Pushed to GitHub** (`main`, 17,854 files, public repo). Before pushing, the staged content was scanned for tokens, the server password and details, and the original publisher's keys; one leftover (a default domain in `server-php/test-remote.js`) was removed and the commit amended before it left this machine. Checked on GitHub afterwards: the key files, `deploy/deploy.conf` and the admin password file are absent, and the code is present.
 - **Deployed to the web server and switched the admin to run there:** new PHP backend for the dashboard (`server-php/`, a port of the Node server: login, validation, solver, generator, level/text/backup endpoints), web-server config files, and `deploy/deploy.sh`. The game is live at the site root and the admin at `/admin/`. Verified on the server: PHP lint, a read-only PHP self-test (20 checks over all 607 levels, byte-identical re-serialisation of every data file, 11 invalid-input cases, 300 generated levels), 16 live API tests, and a real-browser run (Chrome) covering the game page and every admin tab. **Bugs found by those tests and fixed:** (1) in PHP an `fn() =>` closure copies variables when it is created, so the validator's early-return helper always reported "no errors" and a deliberately malformed level (`{"gridWidth":3}`) overwrote level 1 of the live `levels_0.json`; it was restored from the local original (all 10 live data files verified byte-identical afterwards) and the closures now capture by reference; the generator had the same flaw. (2) Anonymous requests created empty session files; sessions now start only for existing sessions or login attempts. The live test now probes invalid levels on the challenge file and cleans up if one is wrongly accepted. The temporary backups made by the tests were deleted.
 - **Not reachable by domain yet:** the arrow subdomain does not exist in public DNS (the parent domain is on Cloudflare). It was tested through the server IP with the right Host header. An `A` record for `arrow` must be added; HTTPS on the origin was not confirmed, so the admin relies on Cloudflare's HTTPS headers.
 - **Repository prepared for a push:** `expo-app` had a nested `.git` from the Expo scaffolder (moved out, so its files are tracked normally). The original publisher's Google/Firebase API key, Firebase IDs and AdMob IDs (in `recovered-source/android/resources/res/values/strings.xml` and `res/layout/activity_main.xml`) are excluded through `.gitignore`. The staged content was scanned for tokens, passwords, server details and those IDs: clean.
